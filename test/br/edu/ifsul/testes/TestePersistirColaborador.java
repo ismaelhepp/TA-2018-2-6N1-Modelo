@@ -1,6 +1,6 @@
 package br.edu.ifsul.testes;
 
-import br.edu.ifsul.modelo.Permissao;
+import br.edu.ifsul.modelo.Colaborador;
 import br.edu.ifsul.modelo.Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,9 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class TestePersistirUsuarioPermissao {
+public class TestePersistirColaborador {
     
-    public TestePersistirUsuarioPermissao() {
+    public TestePersistirColaborador() {
     }
     
     EntityManagerFactory emf;
@@ -32,12 +32,13 @@ public class TestePersistirUsuarioPermissao {
     
     @Test
     public void teste() {
-        Usuario obj = em.find(Usuario.class, "ismael");
-        obj.getPermissoes().add(em.find(Permissao.class, "ADMINISTRADOR"));
-        obj.getPermissoes().add(em.find(Permissao.class, "USUARIO"));
+        Colaborador obj1 = new Colaborador();
+        obj1.setCargaHoraria(10);
+        obj1.setGestor(Boolean.FALSE);
         
         em.getTransaction().begin();
-        em.persist(obj);
+        obj1.setUsuario(em.find(Usuario.class, "ismael"));
+        em.persist(obj1);
         em.getTransaction().commit();
     }
     

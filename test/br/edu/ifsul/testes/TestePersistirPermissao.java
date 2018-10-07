@@ -1,9 +1,6 @@
 package br.edu.ifsul.testes;
 
 import br.edu.ifsul.modelo.Permissao;
-import br.edu.ifsul.modelo.Setor;
-import br.edu.ifsul.modelo.Usuario;
-import java.util.Calendar;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

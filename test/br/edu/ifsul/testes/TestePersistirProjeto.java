@@ -1,7 +1,9 @@
 package br.edu.ifsul.testes;
 
-import br.edu.ifsul.modelo.Permissao;
-import br.edu.ifsul.modelo.Usuario;
+import br.edu.ifsul.modelo.Colaborador;
+import br.edu.ifsul.modelo.Projeto;
+import br.edu.ifsul.modelo.Setor;
+import java.util.Calendar;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -10,9 +12,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class TestePersistirUsuarioPermissao {
+public class TestePersistirProjeto {
     
-    public TestePersistirUsuarioPermissao() {
+    public TestePersistirProjeto() {
     }
     
     EntityManagerFactory emf;
@@ -32,12 +34,16 @@ public class TestePersistirUsuarioPermissao {
     
     @Test
     public void teste() {
-        Usuario obj = em.find(Usuario.class, "ismael");
-        obj.getPermissoes().add(em.find(Permissao.class, "ADMINISTRADOR"));
-        obj.getPermissoes().add(em.find(Permissao.class, "USUARIO"));
+        Projeto obj1 = new Projeto();
+        obj1.setNome("Projeto 01");
+        obj1.setAtivo(Boolean.TRUE);
+        obj1.setDescricao("Projeto 01");
+        obj1.setInicio(Calendar.getInstance());
         
         em.getTransaction().begin();
-        em.persist(obj);
+        obj1.setSetor(em.find(Setor.class, 1));
+        obj1.getColaboradores().add(em.find(Colaborador.class, 1));
+        em.persist(obj1);
         em.getTransaction().commit();
     }
     
